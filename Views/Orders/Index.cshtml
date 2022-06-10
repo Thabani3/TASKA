@@ -1,0 +1,38 @@
+﻿@model IEnumerable<TaskA.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2>Assigned Orders</h2>
+<hr />
+<br />
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-md-3">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+
+                <p><b>Tasker Name: </b> @Html.DisplayFor(modelItem => item.Tasker.Tasker_Name)</p>
+                <p><b>Tasker service Discription: </b> @Html.DisplayFor(modelItem => item.Tasker.Service.Service_Description)</p>
+                <p><b>Render service Description: </b>@Html.DisplayFor(modelItem => item.Bookings.Booking_RenderNote)</p>
+                <p><b>Address: </b>@Html.DisplayFor(modelItem => item.Bookings.Quote.ServiceRender_Address)</p>
+
+                <p><b>Render Sevice Date: </b>@Html.DisplayFor(modelItem => item.Bookings.Booking_RenderDate)</p>
+                @*<a href='@Url.Action("Create", "Orders", new { id = item.Book_ID }, null)' class="btn btn-success">Accept</a>
+                    <a href='@Url.Action("Decline", "Bookings", new { id = item.Book_ID }, null)' class="btn btn-danger">Decline</a>*@
+            </div>
+        </div>
+    }
+</div>
+<br />
+<br />
+<p>
+    @Html.ActionLink("Back to assign order", "Create")
+</p>

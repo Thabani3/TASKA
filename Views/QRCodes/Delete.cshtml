@@ -1,0 +1,53 @@
+﻿@model TaskA.Models.QRCode
+
+@{
+    ViewBag.Title = "Delete";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>QRCode</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.Tasker_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.Tasker_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QRCodeText)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QRCodeText)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QRCodeImagePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QRCodeImagePath)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

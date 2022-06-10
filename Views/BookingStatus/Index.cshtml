@@ -1,0 +1,39 @@
+﻿@model IEnumerable<TaskA.Models.BookingStatus>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Booking_Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Booking_Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.BookingStatus_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.BookingStatus_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.BookingStatus_ID })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,102 @@
+﻿@model TaskA.Models.Quote
+
+@{
+    ViewBag.Title = "Delete";
+
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Quote</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceCat.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceCat.Category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Produced)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Produced)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceRender_Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceRender_Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskA_Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaskA_Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destination_Distance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destination_Distance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Render_hours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Render_hours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Transport_Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transport_Cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RenderService_Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RenderService_Cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quote_Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quote_Cost)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

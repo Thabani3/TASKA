@@ -1,0 +1,176 @@
+﻿@{
+	ViewBag.Title = "Contact";
+}
+<style>
+	.image {
+		opacity: 1;
+		transition: .5s ease;
+		backface-visibility: hidden;
+	}
+	.middle {
+		transition: .5s ease;
+		opacity: 0;
+		position: absolute;
+		top: 50%;
+		left: 87%;
+		transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		text-align: center;
+	}
+.image:hover {
+		opacity: 0.3;
+	}
+.middle:hover {
+		opacity: 1;
+	}
+	.text {
+		
+		color: black;
+		font-size: 16px;
+		padding: 16px 32px;
+	}
+a:link {
+		color: #000;
+		text-decoration: none;
+	}
+
+a:visited {
+		color: #000;
+		text-decoration: none;
+	}
+
+a:hover {
+		text-decoration: none;
+	}
+	.col-md-3 {
+		padding-bottom: 25px;
+	}
+</style>
+
+<center><bold><h2>Dashbaord</h2></bold></center>
+<hr />
+<br />
+<div class="row">
+
+	@*<div class="col-md-3">
+		<div class="container">
+			<div class="card" style="width:450px">
+				<a href='@Url.Action("AllBookings", "Bookings")'>
+					<center>
+						<img alt="Image" src="~/Images/ClientBookings.jpeg" class="image" width="250" height="250">
+						<div class="middle">
+							<div class="text">All Pending Orders</div>
+						</div>
+					</center>
+				</a>
+			</div>
+		</div>
+	</div>*@
+
+	<div class="col-md-3">
+		<div class="container">
+			<div class="card" style="width:450px">
+				<a href='@Url.Action("About", "Home",null)'>
+					<center>
+						<img alt="Image" src="~/Images/images.png" class="image" width="250" height="250">
+						<div class="middle">
+							<div class="text">Booking Projections</div>
+						</div>
+					</center>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-3">
+		<div class="container">
+			<div class="card" style="width:450px">
+				<a class="nametag" href='@Url.Action("Create", "Taskers")'>
+					<center>
+						<img alt="Image" src="~/Images/Taskers.jpeg" class="image" width="250" height="250">
+						<div class="middle">
+							<div class="text">My Takers</div>
+						</div>
+					</center>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="container">
+			<div class="card" style="width:450px">
+				<a href='@Url.Action("AllBookings", "Bookings")'>
+					<center>
+						<img alt="Image" src="~/Images/ClientBookings.jpeg" class="image" width="250" height="250">
+						<div class="middle">
+							<div class="text">All Pending Orders</div>
+						</div>
+					</center>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	@*<div class="col-md-3">
+		<div class="container">
+			<div class="card" style="width:450px">
+				<a href='@Url.Action("About", "Home",null)'>
+					<center>
+						<img alt="Image" src="~/Images/images.png" class="image" width="250" height="250">
+						<div class="middle">
+							<div class="text">Booking Projections</div>
+						</div>
+					</center>
+				</a>
+			</div>
+		</div>
+	</div>*@
+
+	@*<div class="col-md-3">
+		<div class="container">
+			<div class="card" style="width:450px">
+				<a class="nametag" href='@Url.Action("Create", "Taskers")'>
+					<center>
+						<img alt="Image" src="~/Images/Taskers.jpeg" class="image" width="250" height="250">
+						<div class="middle">
+							<div class="text">My Takers</div>
+						</div>
+					</center>
+				</a>
+			</div>
+		</div>
+	</div>*@
+	<div class="col-md-3">
+		<div class="container">
+			<div class="card" style="width:450px">
+				<a class="nametag" href='@Url.Action("Create", "Drivers")'>
+					<center>
+						<img alt="Image" src="~/Images/driver.jpeg" class="image" width="250" height="250">
+						<div class="middle">
+							<div class="text">My Drivers</div>
+						</div>
+					</center>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="container">
+			<div class="card" style="width:450px">
+				<a href='@Url.Action("Create", "ToolSets")'>
+					<center>
+						<img alt="Image" src="~/Images/tools.png" class="image" width="250" height="250">
+						<div class="middle">
+							<div class="text">My Tools</div>
+						</div>
+					</center>
+
+				</a>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<TaskA.Models.Driver>
+
+@{
+    ViewBag.Title = "Index";
+
+
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicle.Vehicle_make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Driver_IDNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Driver_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Driver_Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Diver_Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Driver_CellNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Driver_Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Driver_Email)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vehicle.Vehicle_make)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Driver_IDNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Driver_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Driver_Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diver_Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Driver_CellNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Driver_Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Driver_Email)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Driver_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Driver_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Driver_ID })
+            </td>
+        </tr>
+    }
+
+</table>

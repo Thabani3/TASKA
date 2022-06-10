@@ -1,0 +1,301 @@
+﻿@model TaskA.Models.QRCode
+@helper Truncate(string input, int length)
+{
+    if (input.Length <= length)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0, length)<text>...</text>
+    }
+}
+@{
+    ViewBag.Title = "Details";
+  
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2><b>Invioce</b></h2>
+
+
+<h2 style="text-align:center;">Current Invoice</h2>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <style>
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+
+            .invoice-box table {
+                width: 100%;
+                line-height: inherit;
+                text-align: left;
+            }
+
+                .invoice-box table td {
+                    padding: 5px;
+                    vertical-align: top;
+                }
+
+                .invoice-box table tr td:nth-child(2) {
+                    text-align: right;
+                }
+
+                .invoice-box table tr.top table td {
+                    padding-bottom: 20px;
+                }
+
+                    .invoice-box table tr.top table td.title {
+                        font-size: 45px;
+                        line-height: 45px;
+                        color: #333;
+                    }
+
+                .invoice-box table tr.information table td {
+                    padding-bottom: 40px;
+                }
+
+                .invoice-box table tr.heading td {
+                    background: #eee;
+                    border-bottom: 1px solid #ddd;
+                    font-weight: bold;
+                }
+
+                .invoice-box table tr.details td {
+                    padding-bottom: 20px;
+                }
+
+                .invoice-box table tr.item td {
+                    border-bottom: 1px solid #eee;
+                }
+
+                .invoice-box table tr.item.last td {
+                    border-bottom: none;
+                }
+
+                .invoice-box table tr.total td:nth-child(2) {
+                    border-top: 2px solid #eee;
+                    font-weight: bold;
+                }
+
+        @@media only screen and (max-width: 600px) {
+            .invoice-box table tr.top table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+
+            .invoice-box table tr.information table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        /** RTL **/
+        .rtl {
+            direction: rtl;
+            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+            .rtl table {
+                text-align: right;
+            }
+
+                .rtl table tr td:nth-child(2) {
+                    text-align: left;
+                }
+    </style>
+</head>
+<body>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title">
+
+                                <div class="col-md-10">
+
+                                    @if (Model != null && !String.IsNullOrEmpty(Model.QRCodeImagePath))
+                                    {
+                                        <center>
+                                            <img src="@Url.Content(Model.QRCodeImagePath)" alt="Image" height="250" width="250" />
+                                        </center>
+                                    }
+
+                                </div>
+                            </td>
+
+                            <td>
+                                Order No #:  @Html.DisplayFor(model => model.Order_ID)<br>
+                                Created:  @Html.DisplayFor(model => model.Order.Order_DateTime)<br>
+                                @*2020/07/23*@
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                @*20 Crest Road<br>
+                                    Durban North <br>
+                                    Durban 4051*@ @Truncate(Model.Order.Bookings.Quote.ServiceRender_Address, 25)
+                                </td>
+
+                                <td>
+
+                                    @*John Doe<br>
+                                        john@example.com*@
+                                    @Html.DisplayFor(model => model.Order.Bookings.Book_RecipientName) <br>
+                                    @Html.DisplayFor(model => model.Order.Bookings.Client.Profile_Email)
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr class="heading">
+                    <td>
+                        Payment Date
+                    </td>
+
+                    <td>
+                    </td>
+                </tr>
+
+                <tr class="details">
+                    <td>
+                        @Html.DisplayFor(model => model.Order.Bookings.Booking_date)
+                    </td>
+
+                    <td>
+                    </td>
+                </tr>
+
+                <tr class="heading">
+                    <td>
+                        Details
+                    </td>
+
+                    <td>
+                        Number
+                    </td>
+                </tr>
+
+                <tr class="item">
+                    <td>
+                        Render Service category
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Order.Bookings.Quote.ServiceCat.Category)
+                    </td>
+                </tr>
+
+                <tr class="item">
+                    <td>
+                        Render Service Hours
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Order.Bookings.Quote.Render_hours) hrs
+                    </td>
+                </tr>
+
+                <tr class="item">
+                    <td>
+                        Distance
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Order.Bookings.Quote.Destination_Distance) Km
+                    </td>
+                </tr>
+
+                <tr class="item">
+                    <td>
+                        Render Service Cost
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Order.Bookings.Quote.RenderService_Cost)
+                    </td>
+                </tr>
+
+                <tr class="item">
+                    <td>
+                        Transport Cost
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Order.Bookings.Quote.Transport_Cost)
+                    </td>
+                </tr>
+                @*<tr class="item">
+                        <td>
+                            Item Description
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => model.Bookings.Quote.Quote_Description)
+                        </td>
+                    </tr>*@
+
+                @*<tr class="item last">
+                        <td>
+                            Distance
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => model.Bookings.Quote.Quote_Distance) km
+                        </td>
+                    </tr>*@
+
+                <tr class="heading">
+                    <td>
+                        Payment
+                    </td>
+
+                    <td>
+                        Total
+                    </td>
+                </tr>
+
+
+
+                <tr class="total">
+                    <td>
+                        <b>Grand Total</b>
+                    </td>
+
+                    <td>
+                        R @Html.DisplayFor(model => model.Order.Bookings.Quote.Quote_Cost)
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </body>
+</html>
+<a href='@Url.Action("ViewPDF", "QRCodes", new { id = Model.Order_ID })' class="btn btn-primary">Download As PDF</a>

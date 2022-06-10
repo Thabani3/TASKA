@@ -1,0 +1,31 @@
+﻿@model TaskA.Models.BookingStatus
+
+@{
+    ViewBag.Title = "Details";
+
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2>Details</h2>
+
+<div>
+    <h4>BookingStatus</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Booking_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Booking_Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BookingStatus_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

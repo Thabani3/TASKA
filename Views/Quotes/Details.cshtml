@@ -1,0 +1,106 @@
+﻿@model TaskA.Models.Quote
+
+@{
+    ViewBag.Title = "Details";
+  
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2>Quotation</h2>
+<hr />
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceCat.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceCat.Category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Produced)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Produced)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceRender_Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceRender_Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskA_Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaskA_Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destination_Distance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destination_Distance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Render_hours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Render_hours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Transport_Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transport_Cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RenderService_Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RenderService_Cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discount_Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discount_Cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quote_Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quote_Cost)
+        </dd>
+
+    </dl>
+</div>
+<div class="row">
+    <a href='@Url.Action("Create", "Bookings", new { id = Model.Quote_ID }, null)' class="btn btn-success">Proceed</a>
+
+    <a href='@Url.Action("Edit", "Quotes", new { id = Model.Quote_ID }, null)' class="btn btn-warning">Edit</a>
+
+    <a href='@Url.Action("Delete", "Quotes", new { id = Model.Quote_ID }, null)' class="btn btn-danger">Cancel</a>
+</div>
+

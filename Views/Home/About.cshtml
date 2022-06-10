@@ -1,0 +1,61 @@
+﻿@{
+	ViewBag.Title = "About";
+}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure">
+	<div id="container"></div>
+	<p class="highcharts-description">
+		This chart shows how data labels can be added to the data series. This
+		can increase readability and comprehension for small datasets.
+	</p>
+</figure>
+
+
+<script>
+		$(document).ready(function () {
+			$.getJSON("/Home/GetData", function (data) {
+				var Names = []
+				var Qts = []
+				for (var i = 0; i < data.length; i++) {
+					Names.push(data[i].name);
+					Qts.push(data[i].count);
+				}
+
+				Highcharts.chart('container', {
+					chart: {
+						type: 'column'
+					},
+					title: {
+						text: 'Monthly Orders'
+					},
+					subtitle: {
+						text: 'Discription of Projection'
+					},
+					xAxis: {
+						categories: Names
+					},
+					yAxis: {
+						title: {
+							text: 'Number of Orders'
+						}
+					},
+					plotOptions: {
+						line: {
+							dataLabels: {
+								enabled: true
+							},
+							enableMouseTracking: false
+						}
+					},
+					series: [{
+						name: 'Trend',
+						data: Qts
+					}]
+				});
+			});
+		});
+</script>

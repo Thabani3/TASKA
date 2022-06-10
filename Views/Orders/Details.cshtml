@@ -1,0 +1,211 @@
+﻿@model TaskA.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+
+}
+@{
+    string address = "";
+    address = Model.Bookings.Quote.ServiceRender_Address;
+
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<title>@ViewBag.Title</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<title>Places Searchbox</title>
+<body onload="setLocation()">
+</body>
+<style>
+
+    #dvMap {
+        height: 50%;
+    }
+
+    .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .button4 {
+        border-radius: 9px;
+    }
+
+    input[type=text], select {
+        width: 40%;
+        padding: 12px 20px;
+        margin: 10px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+</style>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0_sFPYsqpl20d3ZsiuCc3mauXYBcZOec&libraries=places&callback=dvMap">
+</script>
+<script type="text/javascript">
+    var source, destination;
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    google.maps.event.addDomListener(window, 'load', function () {
+        new google.maps.places.SearchBox(document.getElementById('txtSource'));
+        new google.maps.places.SearchBox(document.getElementById('txtDestination'));
+        directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
+    });
+    var curLat;
+    var curlong;
+    var latitude;
+    var longitude;
+     function setLocation() {
+         getLocation();
+         document.getElementById('txtDestination').value = "@address";
+      }
+            //GeoCode Address from text to latitude to longitude
+                function geocodeAddress(geocoder, resultsMap) {
+                    const address ="@address";
+
+
+                    geocoder.geocode({ address: address }, (results, status) => {
+                        if (status === "OK") {
+                            resultsMap.setCenter(results[0].geometry.location);
+                            new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location,
+                });
+
+                 latitude = results[0].geometry.location.lat();
+                 longitude = results[0].geometry.location.lng();
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
+    }
+        });
+    }
+
+    // Get browser location using geolocation
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    // open and show position on google maps
+    function showPosition(position) {
+        curLat = position.coords.latitude;
+        curlong = position.coords.longitude;
+        console.log(curLat + "," + curlong)
+    }
+    function openMaps() {
+
+        var url = "http://maps.google.com/maps?saddr=" + curLat + "," + curlong + "&daddr=" + latitude + "," + longitude;
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
+    /// calculate optimal route
+    function GetRoute() {
+        var durban = new google.maps.LatLng(-29.708421, 31.0322233);
+        var mapOptions = {
+            zoom: 7,
+            center: durban
+        };
+
+    map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
+        directionsDisplay.setMap(map);
+        directionsDisplay.setPanel(document.getElementById('dvPanel'));
+
+        //source = document.getElementById("txtSource").value;
+        source = new google.maps.LatLng(curLat, curlong);
+        destination = "@address";
+
+
+
+        const geocoder = new google.maps.Geocoder();
+    geocodeAddress(geocoder, map);
+
+    var request = {
+            origin: source,
+            destination: destination,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+    directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            }
+        });
+
+
+        var service = new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix({
+            origins: [source],
+            destinations: [destination],
+            travelMode: google.maps.TravelMode.DRIVING,
+            unitSystem: google.maps.UnitSystem.METRIC,
+            avoidHighways: false,
+            avoidTolls: false
+        }, function (response, status) {
+        if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+            var distance = response.rows[0].elements[0].distance.text;
+            var duration = response.rows[0].elements[0].duration.text;
+            var dvDistance = document.getElementById("dvDistance");
+            var dvDir = document.getElementById("dvDir");
+            dvDistance.innerHTML = "";
+            dvDistance.innerHTML += "Distance: " + distance + "<br />";
+            dvDistance.innerHTML += "Duration: " + duration;
+            dvDir.innerHTML = "";
+            dvDir.innerHTML = "Directions";
+            //alert(dvDistance.innerHTML);
+        } else {
+            alert("Your Request For Distance Not Available");
+        }
+    });
+    }
+</script>
+
+<br />
+<hr />
+<div class="row">
+    <div class="col-sm-8">
+        <h4>Navigating To</h4>
+        <h2>@address</h2>
+        <br />
+        <input type="button" value="Show Directions" onclick="GetRoute()" class="btn btn-primary" />
+        <input type="button" value="Open Google Maps" onclick="openMaps()" class="btn btn-primary" />
+    </div>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-sm-8">
+        <div id="dvDistance" style="font-size:x-large; font-family: Arial Black; text-align: center">
+        </div>
+        <div id="dvMap" style="height:600px;width:100%;">
+        </div>
+
+    </div>
+    <div class="col-sm-4">
+        <div id="dvDir" style="font-size:x-large; font-family: Arial Black; text-align: center">
+        </div>
+        <div id="dvPanel">
+        </div>
+    </div>
+</div>
+<hr />

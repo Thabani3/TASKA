@@ -1,0 +1,40 @@
+﻿@model IEnumerable<TaskA.Models.Order>
+
+@{
+    ViewBag.Title = "DriverRequest";
+
+}
+<h2>Navigate to destination</h2>
+
+<hr />
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-md-3">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+
+                <p>Recipient Name: @Html.DisplayFor(modelItem => item.Bookings.Book_RecipientName)</p>
+                <p>Recipient Name: @Html.DisplayFor(modelItem => item.Bookings.Book_RecipientNumber)</p>
+                <p>Service Description: @Html.DisplayFor(modelItem => item.Bookings.Booking_RenderNote)</p>
+                <p>Address: @Html.DisplayFor(modelItem => item.Bookings.Quote.ServiceRender_Address)</p>
+
+                <p>Render Sevice Date: @Html.DisplayFor(modelItem => item.Bookings.Booking_RenderDate)</p>
+                @{
+
+                    TaskA.Models.ApplicationDbContext db = new TaskA.Models.ApplicationDbContext();
+
+                    var findPerson = (from i in db.Orders
+                                      where i.Order_ID == item.Order_ID
+                                      select i.Driver_ID).SingleOrDefault();
+                    if (item.Driver_ID != null)
+                    {
+                        <a href='@Url.Action("Details", "Orders", new { id = item.Order_ID }, null)' class="btn btn-primary">Navigate to destination</a>
+                    }
+
+                   
+                }
+            </div>
+        </div>
+    }
+</div>
